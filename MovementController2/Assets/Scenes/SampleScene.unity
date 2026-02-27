@@ -450,6 +450,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCharacter
   cameraPosition: {fileID: 1181032443}
+  moveSpeed: 7
+  moveAcceleration: 20
+  sprintSpeed: 12
+  sprintAcceleration: 15
+  crouchSpeedMultiplier: 0.5
+  crouchAcceleration: 12
+  jumpHeight: 1.2
+  gravity: 25
+  jumpHoldGravityMultiplier: 0.66
+  coyoteTime: 0.1
+  airAcceleration: 8
+  steerLimit: 0.2
+  standingHeight: 2
+  crouchingHeight: 1
+  standingCameraHeight: 0.8
+  crouchingCameraHeight: 0.5
+  slidingCameraHeight: 0.33
+  standingHandsHeight: 0
+  crouchingHandsHeight: -0.75
+  crouchHeightAcceleration: 12.5
+  slideMinSpeed: 10
+  slideStartSpeed: 13
+  slideEndSpeed: 5
+  slideFriction: 1
+  slideAcceleration: 30
+  slideSteerAcceleration: 30
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

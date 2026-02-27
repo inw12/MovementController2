@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
         // Camera Input
         playerCamera.UpdateRotation(input.Look.ReadValue<Vector2>());
 
-        // Character Inputs
+        // Character Input
         var characterInput = new CharacterInput
         {
             Rotation    = playerCamera.transform.rotation,
@@ -51,6 +51,9 @@ public class Player : MonoBehaviour
             Interact    = input.Interact.WasPerformedThisFrame(),
         };
         playerCharacter.UpdateInput(characterInput);
+        playerCharacter.UpdateBody(deltaTime);
+
+        Debug.Log(playerCharacter.GetState().CurrentAction);
     }
 
     void LateUpdate()
