@@ -22,11 +22,11 @@ public struct CharacterState
 public enum CharacterAction
 {
     Idle,
-    Walk,
+    Move,
     Sprint,
     Jump,
     Crouch,
-    CrouchWalk,
+    CrouchMove,
     Slide,
     Mantle,
     Grapple
@@ -180,10 +180,16 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             Stance.Slide => slidingCameraHeight,
             _ => standingCameraHeight
         } * currentHeight;
+        var targetCameraPosition = new Vector3
+        (
+            cameraPosition.localPosition.x,
+            targetCameraHeight,
+            cameraPosition.localPosition.z
+        );
         cameraPosition.localPosition = Vector3.Lerp
         (
             cameraPosition.localPosition,
-            new Vector3(0f, targetCameraHeight, 0f),
+            targetCameraPosition,
             1f - Mathf.Exp(-crouchHeightAcceleration * deltaTime)
         );
     }
@@ -318,9 +324,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                     if (_requestedMovement.sqrMagnitude > 0f)
                     {
                         if (_state.Stance is Stance.Stand)
-                            _state.CurrentAction = targetSpeed == sprintSpeed ? CharacterAction.Sprint : CharacterAction.Walk;
+                            _state.CurrentAction = targetSpeed == sprintSpeed ? CharacterAction.Sprint : CharacterAction.Move;
                         else if (_state.Stance is Stance.Crouch)
-                            _state.CurrentAction = CharacterAction.CrouchWalk;
+                            _state.CurrentAction = CharacterAction.CrouchMove;
                     }
                     else
                     {
