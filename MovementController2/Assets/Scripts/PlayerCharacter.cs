@@ -29,7 +29,7 @@ public enum CharacterAction
     CrouchMove = 5,
     Slide = 6,
     Mantle = 7,
-    Grappl = 8
+    Grapple = 8
 }
 
 public enum Stance
@@ -157,12 +157,12 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 CrouchInput.Release => false,
                 _ => _requestedCrouch
             };
-            //if (_requestedCrouch && !wasRequestingCrouch) {
-            //    _requestedCrouchInAir = !_state.Grounded;
-            //}
-            //else if (!_requestedCrouch && wasRequestingCrouch) {
-            //    _requestedCrouchInAir = false;
-            //}
+            if (_requestedCrouch && !wasRequestingCrouch) {
+                _requestedCrouchInAir = !_state.Grounded;
+            }
+            else if (!_requestedCrouch && wasRequestingCrouch) {
+                _requestedCrouchInAir = false;
+            }
 
             // Sprint
             _requestedSprint = input.Sprint ? !_requestedSprint : _requestedSprint;
@@ -175,7 +175,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     public void UpdateBody(float deltaTime)
     {
         var currentHeight = _motor.Capsule.height;
-        
+
         // Change camera height on crouch/uncrouch
         var targetCameraHeight = _state.Stance switch
         {
