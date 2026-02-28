@@ -73,7 +73,14 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     [Header("Crouch")]
     [SerializeField] private float standingCapsuleHeight = 2f;
+    [SerializeField] [Range(0f, 1f)] private float standingCameraHeight = 0.8f;
+    [Space]
     [SerializeField] private float crouchingCapsuleHeight = 1f;
+    [SerializeField] [Range(0f, 1f)] private float crouchingCameraHeight= 0.5f;
+    [Space]
+    [SerializeField] [Range(0f, 1f)] private float slidingCameraHeight= 0.33f;
+    [Space]
+    [SerializeField] private float crouchHeightAcceleration = 20f;
 
     [Header("Slide")]
     [SerializeField] private float slideMinSpeed = 12f;
@@ -163,6 +170,25 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             // Interact
             _requestedInteract = input.Interact;
         }
+    }
+
+    public void UpdateBody(float deltaTime)
+    {
+        var currentHeight = _motor.Capsule.height;
+        
+        // Change camera height on crouch/uncrouch
+        var targetCameraHeight = _state.Stance switch
+        {
+            Stance.Crouch => crouchingCameraHeight,
+            Stance.Slide => slidingCameraHeight,
+            _ => standingCameraHeight
+        } * currentHeight;
+        cameraPosition.localPosition = Vector3.Lerp
+        (
+            cameraPosition.localPosition,
+            new Vector3(0f, targetCameraHeight, 0f),
+            1f - Mathf.Exp(-crouchHeightAcceleration * deltaTime)
+        );
     }
 
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)

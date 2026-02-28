@@ -51,6 +51,7 @@ public class Player : MonoBehaviour
             Interact    = input.Interact.WasPerformedThisFrame(),
         };
         playerCharacter.UpdateInput(characterInput);
+        playerCharacter.UpdateBody(deltaTime);
     }
 
     void LateUpdate()

@@ -6,7 +6,6 @@ public class PlayerCamera : MonoBehaviour
     [Header("Camera Controls")]
     [SerializeField] private float sensitivity = 0.75f;
     [SerializeField] [Range(0f, 90f)] private float cameraBounds = 80f;
-    [SerializeField] private float cameraSmooth = 10f;
 
     private Vector3 _eulerAngles;
 
@@ -25,11 +24,6 @@ public class PlayerCamera : MonoBehaviour
 
     public void UpdatePosition(Transform target)
     {
-        transform.position = Vector3.Lerp
-        (
-            transform.position,
-            target.position,
-            1f - Mathf.Exp(-cameraSmooth * Time.deltaTime)
-        );
+        transform.position = target.position;
     }
 }
