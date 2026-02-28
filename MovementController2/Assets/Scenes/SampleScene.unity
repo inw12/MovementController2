@@ -214,7 +214,6 @@ MonoBehaviour:
   mainCamera: {fileID: 330585545}
   sensitivity: 0.5
   cameraBounds: 80
-  cameraSmooth: 30
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,7 +481,7 @@ MonoBehaviour:
   standingCameraHeight: 0.925
   crouchingCapsuleHeight: 0.925
   crouchingCameraHeight: 1
-  slidingCameraHeight: 0.33
+  slidingCameraHeight: 0.9
   crouchHeightAcceleration: 20
   slideMinSpeed: 10
   slideStartSpeed: 13
