@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 102735039}
+  - component: {fileID: 102735040}
   m_Layer: 0
   m_Name: Root
   m_TagString: Untagged
@@ -151,6 +152,20 @@ Transform:
   - {fileID: 543450652666653711}
   m_Father: {fileID: 384016067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &102735040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102735038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acd307a4d7233418e80459a47df9ba5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterAnimationController
+  playerCharacter: {fileID: 384016070}
+  animator: {fileID: 5866666020979848821}
 --- !u!1 &311319346
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,7 +1108,7 @@ GameObject:
   - component: {fileID: 543450652666653711}
   - component: {fileID: 5866666020979848821}
   m_Layer: 0
-  m_Name: HumanCharacterDummy_M
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2126,7 +2141,7 @@ Animator:
   m_GameObject: {fileID: 919132149013427893}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: d9cd8eb4a074cd84ab2686c58bcf21d9, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3b12027f2c73e4e43a3557cf0307de73, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1

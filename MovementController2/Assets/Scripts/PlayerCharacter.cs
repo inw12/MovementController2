@@ -21,20 +21,22 @@ public struct CharacterState
 }
 public enum CharacterAction
 {
-    Idle,
-    Move,
-    Sprint,
-    Jump,
-    Crouch,
-    CrouchMove,
-    Slide,
-    Mantle,
-    Grapple
+    Idle = 0,
+    Move = 1,
+    Sprint = 2,
+    Jump = 3,
+    Crouch = 4,
+    CrouchMove = 5,
+    Slide = 6,
+    Mantle = 7,
+    Grappl = 8
 }
 
 public enum Stance
 {
-    Stand, Crouch, Slide
+    Stand = 0,
+    Crouch = 1,
+    Slide = 2
 }
 public enum CrouchInput
 {
