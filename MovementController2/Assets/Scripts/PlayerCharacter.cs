@@ -99,6 +99,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     // Requested Inputs
     private Quaternion _requestedRotation;
     private Vector3 _requestedMovement;
+    private Vector3 _requestedMovementRaw;
     private bool _requestedJump;
     private bool _requestedJumpHold;
     private bool _requestedCrouch;
@@ -143,6 +144,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             // Movement
             _requestedMovement = new Vector3(input.Movement.x, 0f, input.Movement.y).normalized;
             _requestedMovement = input.Rotation * _requestedMovement;
+            _requestedMovementRaw = input.Movement;
 
             // Jump
             _requestedJump = input.Jump || _requestedJump;
@@ -498,8 +500,12 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private void EnableInput()  {  _inputEnabled = true;   }
     private void DisableInput() {  _inputEnabled = false;  }
 
-    // Returns character state
+    // State Machine Getters
     public CharacterState GetState() => _state;
+    public CharacterState GetPrevState() => _prevState;
+
+    // Returns raw movement input
+    public Vector3 GetRawDirectionalMovement() => _requestedMovementRaw;
 
     //  Returns true/false if character is eligible to start sliding
     private bool CanSlide()
