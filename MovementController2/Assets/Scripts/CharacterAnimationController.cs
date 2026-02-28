@@ -19,7 +19,7 @@ public class CharacterAnimationController : MonoBehaviour
         // Feed Player Input
         var input = playerCharacter.GetRawDirectionalMovement();
         animator.SetFloat("xInput", input.x);
-        animator.SetFloat("yInput", input.z);
+        animator.SetFloat("yInput", input.y);
 
         var currentState = playerCharacter.GetState();
 
@@ -42,9 +42,5 @@ public class CharacterAnimationController : MonoBehaviour
         }
         
         _prevState = currentState;
-
-        Debug.Log("Action: " + animator.GetInteger("CurrentAction"));
-        Debug.Log("Stance: " + animator.GetInteger("Stance"));
-        Debug.Log("Is Grounded: " + animator.GetBool("IsGrounded"));
     }
 }
