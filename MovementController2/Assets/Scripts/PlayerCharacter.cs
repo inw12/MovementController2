@@ -72,17 +72,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private float steerLimit = 1f;
 
     [Header("Crouch")]
-    [SerializeField] private float standingHeight = 2f;
-    [SerializeField] private float crouchingHeight = 1f;
-    [Space]
-    [SerializeField] [Range(0f, 1f)] private float standingCameraHeight = 0.8f;
-    [SerializeField] [Range(0f, 1f)] private float crouchingCameraHeight= 0.5f;
-    [SerializeField] [Range(0f, 1f)] private float slidingCameraHeight= 0.33f;
-    [Space]
-    [SerializeField] private float standingHandsHeight = 0f;
-    [SerializeField] private float crouchingHandsHeight = -0.75f;
-    [Space]
-    [SerializeField] private float crouchHeightAcceleration = 20f;
+    [SerializeField] private float standingCapsuleHeight = 2f;
+    [SerializeField] private float crouchingCapsuleHeight = 1f;
 
     [Header("Slide")]
     [SerializeField] private float slideMinSpeed = 12f;
@@ -172,30 +163,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             // Interact
             _requestedInteract = input.Interact;
         }
-    }
-
-    public void UpdateBody(float deltaTime)
-    {
-        // Change camera height on crouch/uncrouch
-        var currentHeight = _motor.Capsule.height;
-        var targetCameraHeight = _state.Stance switch
-        {
-            Stance.Crouch => crouchingCameraHeight,
-            Stance.Slide => slidingCameraHeight,
-            _ => standingCameraHeight
-        } * currentHeight;
-        var targetCameraPosition = new Vector3
-        (
-            cameraPosition.localPosition.x,
-            targetCameraHeight,
-            cameraPosition.localPosition.z
-        );
-        cameraPosition.localPosition = Vector3.Lerp
-        (
-            cameraPosition.localPosition,
-            targetCameraPosition,
-            1f - Mathf.Exp(-crouchHeightAcceleration * deltaTime)
-        );
     }
 
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
@@ -432,8 +399,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 _motor.SetCapsuleDimensions
                 (
                     radius: _motor.Capsule.radius,
-                    height: crouchingHeight,
-                    yOffset: crouchingHeight * 0.5f
+                    height: crouchingCapsuleHeight,
+                    yOffset: crouchingCapsuleHeight * 0.5f
                 );
             }
         }
@@ -447,8 +414,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             // Tentatively "stand up" the character capsule
             _motor.SetCapsuleDimensions(
                 radius: _motor.Capsule.radius,
-                height: standingHeight,
-                yOffset: standingHeight * 0.5f
+                height: standingCapsuleHeight,
+                yOffset: standingCapsuleHeight * 0.5f
             );
 
             // Check for collider overlap above character
@@ -461,8 +428,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 _requestedCrouch = true;
                 _motor.SetCapsuleDimensions(
                     radius: _motor.Capsule.radius,
-                    height: crouchingHeight,
-                    yOffset: crouchingHeight * 0.5f
+                    height: crouchingCapsuleHeight,
+                    yOffset: crouchingCapsuleHeight * 0.5f
                 );
             }
             else
