@@ -33,7 +33,6 @@ public class CharacterAnimationController : MonoBehaviour
         if (currentState.CurrentAction != _prevState.CurrentAction)
         {
             animator.SetInteger(action, (int)currentState.CurrentAction);
-            Debug.Log(currentState.CurrentAction);
         }
 
         // Feed Grounding Stats
