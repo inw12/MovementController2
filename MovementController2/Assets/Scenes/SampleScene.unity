@@ -214,7 +214,7 @@ MonoBehaviour:
   mainCamera: {fileID: 330585545}
   sensitivity: 0.5
   cameraBounds: 80
-  cameraSmooth: 20
+  cameraSmooth: 25
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
